@@ -9,7 +9,7 @@ java-persistence-tutorial
 * H2Database 1.3.175
 * Spring Framework 4.0.0.RELEASE
 
-## Entity Diagram
-モデルは一般的でシンプルな受注システムです。
+## Domain Model
+モデルはシンプルな受注システムです。
 ![ER Diagram](https://raw.github.com/satoshiyamamoto/java-persistence-tutorial/master/docs/erd.png)
 
