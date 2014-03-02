@@ -3,25 +3,36 @@ package name.yamamoto.satoshi.persistence.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="orders")
 public class Order extends Model {
 	private static final long serialVersionUID = 1L;
-	private Long id;
-	private Date purchaseOrderDate;
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private Long orderId;
+	private Date purchaseOrderdate;
 	private Double totalAmount;
+	@OneToMany(mappedBy="order")
 	private List<OrderLine> orderLines;
 	private Date createAt;
 	private Date updateAt;
 	public Long getId() {
-		return id;
+		return orderId;
 	}
 	public void setId(Long id) {
-		this.id = id;
+		this.orderId = id;
 	}
-	public Date getPurchaseOrderDate() {
-		return purchaseOrderDate;
+	public Date getPurchaseOrderdate() {
+		return purchaseOrderdate;
 	}
-	public void setPurchaseOrderDate(Date purchaseOrderDate) {
-		this.purchaseOrderDate = purchaseOrderDate;
+	public void setPurchaseOrderdate(Date purchaseOrderdate) {
+		this.purchaseOrderdate = purchaseOrderdate;
 	}
 	public Double getTotalAmount() {
 		return totalAmount;
@@ -51,7 +62,7 @@ public class Order extends Model {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		return result;
 	}
 	@Override
@@ -63,10 +74,10 @@ public class Order extends Model {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (orderId == null) {
+			if (other.orderId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!orderId.equals(other.orderId))
 			return false;
 		return true;
 	}
