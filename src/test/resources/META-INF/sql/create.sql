@@ -1,2 +1,0 @@
-create table exams (id bigint auto_increment,code varchar(255),title varchar(255) not null,description text,passing_score int default 0,time_limit int,edition varchar(255),primary key (id));
-create table questions (id bigint auto_increment,exam_id bigint not null,text text not null,ordinal int default 0,type varchar(32) not null,options text not null,position int default 0,answer int default 0,score int,primary key (id));

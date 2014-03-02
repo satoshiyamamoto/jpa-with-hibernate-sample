@@ -3,41 +3,60 @@ package name.yamamoto.satoshi.persistence.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Table(name="products")
 public class Product extends Model {
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Long productId;
 	private String name;
 	private Double price;
 	private String description;
-	@Column(name="category_id")
 	private Long categoryId;
-//	@Transient
-	@ManyToOne @JoinColumn(name="category_id", insertable=false, updatable=false)
+	@ManyToOne @JoinColumn(name="categoryId", insertable=false, updatable=false)
 	private Category category;
-	@Transient
+	@ManyToMany @JoinTable(name="product_tag", joinColumns={@JoinColumn(name="productId")}, inverseJoinColumns={@JoinColumn(name="tagId")})
 	private List<Tag> tags;
 	private Date createAt;
 	private Date updateAt;
+
+// -- basic methods --
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (productId == null) {
+			if (other.productId != null)
+				return false;
+		} else if (!productId.equals(other.productId))
+			return false;
+		return true;
+	}
+
+// -- field accesor --
 	
 	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
+		return productId;
 	}
 	public String getName() {
 		return name;
@@ -86,28 +105,5 @@ public class Product extends Model {
 	}
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
 	}
 }

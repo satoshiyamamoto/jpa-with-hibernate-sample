@@ -7,26 +7,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
-@Table(name="tags")
 public class Tag extends Model {
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Long tagId;
 	private String name;
-	@Transient
+	@ManyToMany @JoinTable(name="product_tag", joinColumns={@JoinColumn(name="tagId")}, inverseJoinColumns={@JoinColumn(name="productId")})
 	private List<Product> products;
 	private Date createAt;
 	private Date updateAt;
+	
 	public Long getId() {
-		return id;
+		return tagId;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}
@@ -55,7 +54,7 @@ public class Tag extends Model {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((tagId == null) ? 0 : tagId.hashCode());
 		return result;
 	}
 	@Override
@@ -67,10 +66,10 @@ public class Tag extends Model {
 		if (getClass() != obj.getClass())
 			return false;
 		Tag other = (Tag) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (tagId == null) {
+			if (other.tagId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!tagId.equals(other.tagId))
 			return false;
 		return true;
 	}

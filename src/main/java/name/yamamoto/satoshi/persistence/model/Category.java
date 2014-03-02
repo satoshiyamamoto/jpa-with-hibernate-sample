@@ -3,7 +3,6 @@ package name.yamamoto.satoshi.persistence.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,18 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="categories")
 public class Category extends Model {
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Long categoryId;
 	private String name;
-	@Column(name="parent_id")
 	private Long parentId;
-	@ManyToOne @JoinColumn(name="id",referencedColumnName="parent_id", insertable=false, updatable=false)
+	@ManyToOne @JoinColumn(name="categoryId",referencedColumnName="parentId", insertable=false, updatable=false)
 	private Category parent;
 	@OneToMany(mappedBy="parent")
 	private List<Category> children;
@@ -31,13 +27,13 @@ public class Category extends Model {
 	private Date createAt;
 	private Date updateAt;
 
-// == basic methods --
+// ---basic methods --
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((categoryId == null) ? 0 : categoryId.hashCode());
 		return result;
 	}
 	
@@ -50,16 +46,45 @@ public class Category extends Model {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (categoryId == null) {
+			if (other.categoryId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!categoryId.equals(other.categoryId))
 			return false;
 		return true;
 	}
-
-// -- field accesor --
 	
+// -- field accesor --
+
+	@Override
+	public Long getId() {
+		return this.categoryId;
+	}
+
+	@Override
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	@Override
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;		
+	}
+
+	@Override
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+
+	@Override
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -98,26 +123,6 @@ public class Category extends Model {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
-
-	public Date getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	public Date getUpdateAt() {
-		return updateAt;
-	}
-
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 }
