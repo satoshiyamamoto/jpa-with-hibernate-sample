@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import name.yamamoto.satoshi.persistence.repository.TagRepository;
+
 @Entity
 public class Tag extends Model {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +23,7 @@ public class Tag extends Model {
 	private List<Product> products;
 	private Date createAt;
 	private Date updateAt;
+	static transient TagRepository repository;
 	
 	public Long getId() {
 		return tagId;
@@ -73,4 +76,10 @@ public class Tag extends Model {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
+	
 }

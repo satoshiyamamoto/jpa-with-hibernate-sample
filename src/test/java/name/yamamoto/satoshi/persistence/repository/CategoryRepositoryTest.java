@@ -32,6 +32,11 @@ public class CategoryRepositoryTest {
 		assertThat(result.getParentId(), nullValue());
 		assertThat(result.getProducts(), notNullValue());
 		assertThat(result.getProducts().isEmpty(), equalTo(false));
+
+		result = repository.find(2L);
+		assertThat(result, notNullValue());
+		assertThat(result.getParent(), notNullValue());
+		assertThat(result.getParent().getName(), equalTo("name1"));
 	}
 	
 	public void testFind_SouldBeFindAll() {

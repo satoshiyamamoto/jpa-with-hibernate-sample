@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import name.yamamoto.satoshi.persistence.repository.OrderRepository;
+
 @Entity
 @Table(name="orders")
 public class Order extends Model {
@@ -22,6 +24,7 @@ public class Order extends Model {
 	private List<OrderLine> orderLines;
 	private Date createAt;
 	private Date updateAt;
+	static transient OrderRepository repository;
 	
 // -- basic methods --
 	

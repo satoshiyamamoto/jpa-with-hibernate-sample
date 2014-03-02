@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import name.yamamoto.satoshi.persistence.repository.ProductRepository;
 
 @Entity
 public class Product extends Model {
@@ -23,11 +26,32 @@ public class Product extends Model {
 	private Long categoryId;
 	@ManyToOne @JoinColumn(name="categoryId", insertable=false, updatable=false)
 	private Category category;
-	@ManyToMany @JoinTable(name="product_tag", joinColumns={@JoinColumn(name="productId")}, inverseJoinColumns={@JoinColumn(name="tagId")})
+	@ManyToMany(fetch=FetchType.EAGER) @JoinTable(name="product_tag", joinColumns={@JoinColumn(name="productId")}, inverseJoinColumns={@JoinColumn(name="tagId")})
 	private List<Tag> tags;
 	private Date createAt;
 	private Date updateAt;
+	static transient ProductRepository repository;
 
+// -- persistence methods --
+	
+	public static Product find(long id) {
+		return repository.find(id);
+	}
+	
+	public static List<Product> findAll() {
+		return repository.findAll();
+	}
+	
+	public Product update() {
+		 repository.update(this);
+		 return this;
+	}
+	
+	public Product save() {
+		 repository.update(this);
+		 return this;
+	}
+	
 // -- basic methods --
 	@Override
 	public int hashCode() {

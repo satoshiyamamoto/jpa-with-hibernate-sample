@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import name.yamamoto.satoshi.persistence.repository.CategoryRepository;
+
 @Entity
 public class Category extends Model {
 	private static final long serialVersionUID = 1L;
@@ -18,7 +20,7 @@ public class Category extends Model {
 	private Long categoryId;
 	private String name;
 	private Long parentId;
-	@ManyToOne @JoinColumn(name="categoryId", referencedColumnName="parentId", insertable=false, updatable=false)
+	@ManyToOne @JoinColumn(name="parentId", referencedColumnName="categoryId", insertable=false, updatable=false)
 	private Category parent;
 	@OneToMany(mappedBy="parent")
 	private List<Category> children;
@@ -26,6 +28,7 @@ public class Category extends Model {
 	private List<Product> products;
 	private Date createAt;
 	private Date updateAt;
+	static transient CategoryRepository repository;
 
 // ---basic methods --
 	
