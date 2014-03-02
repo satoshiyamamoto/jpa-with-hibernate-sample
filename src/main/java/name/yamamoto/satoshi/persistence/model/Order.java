@@ -26,6 +26,26 @@ public class Order extends Model {
 	private Date updateAt;
 	static transient OrderRepository repository;
 	
+// -- persistence methods --
+	
+	public static Order find(long id) {
+		return repository.find(id);
+	}
+	
+	public static List<Order> findAll() {
+		return repository.findAll();
+	}
+	
+	public Order update() {
+		repository.update(this);
+		return this;
+	}
+	
+	public Order save() {
+		repository.save(this);
+		return this;
+	}
+	
 // -- basic methods --
 	
 	@Override

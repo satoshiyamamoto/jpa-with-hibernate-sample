@@ -24,6 +24,52 @@ public class Tag extends Model {
 	private Date createAt;
 	private Date updateAt;
 	static transient TagRepository repository;
+
+// -- persistence methods --
+	
+	public static Tag find(long id) {
+		return repository.find(id);
+	}
+	
+	public static List<Tag> findAll() {
+		return repository.findAll();
+	}
+	
+	public Tag update() {
+		repository.update(this);
+		return this;
+	}
+	
+	public Tag save() {
+		repository.save(this);
+		return this;
+	}
+	
+// -- basic methods --
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tag other = (Tag) obj;
+		if (tagId == null) {
+			if (other.tagId != null)
+				return false;
+		} else if (!tagId.equals(other.tagId))
+			return false;
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
+	
+// -- field accesor --
 	
 	public Long getId() {
 		return tagId;
@@ -60,26 +106,4 @@ public class Tag extends Model {
 		result = prime * result + ((tagId == null) ? 0 : tagId.hashCode());
 		return result;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Tag other = (Tag) obj;
-		if (tagId == null) {
-			if (other.tagId != null)
-				return false;
-		} else if (!tagId.equals(other.tagId))
-			return false;
-		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return getName();
-	}
-	
 }
