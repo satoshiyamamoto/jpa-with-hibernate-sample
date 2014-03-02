@@ -11,5 +11,5 @@ java-persistence-tutorial
 
 ## Entity Diagram
 モデルは一般的でシンプルな受注システムです。
-!(https://github.com/satoshiyamamoto/java-persistence-tutorial/blob/master/docs/erd.png)[ER Diagram]
+![ER Diagram](https://github.com/satoshiyamamoto/java-persistence-tutorial/blob/master/docs/erd.png)
 
