@@ -18,7 +18,7 @@ public class Category extends Model {
 	private Long categoryId;
 	private String name;
 	private Long parentId;
-	@ManyToOne @JoinColumn(name="categoryId",referencedColumnName="parentId", insertable=false, updatable=false)
+	@ManyToOne @JoinColumn(name="categoryId", referencedColumnName="parentId", insertable=false, updatable=false)
 	private Category parent;
 	@OneToMany(mappedBy="parent")
 	private List<Category> children;
