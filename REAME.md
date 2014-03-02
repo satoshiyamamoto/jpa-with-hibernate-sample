@@ -10,4 +10,6 @@ java-persistence-tutorial
 * Spring Framework 4.0.0.RELEASE
 
 ## Entity Diagram
-ごく単純な受注システムのモデルです。
+モデルは一般的でシンプルな受注システムです。
+!(https://github.com/satoshiyamamoto/java-persistence-tutorial/blob/master/docs/erd.png)[ER Diagram]
+
