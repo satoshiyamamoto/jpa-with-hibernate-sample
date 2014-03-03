@@ -20,7 +20,7 @@ public class OrderRepository implements GenericRepository<Order, Long> {
 
 	@Override
 	public List<Order> findAll() {
-		return em.createQuery("select p from Product p", Order.class).getResultList();
+		return em.createQuery("select o from Order o", Order.class).getResultList();
 	}
 
 	@Override

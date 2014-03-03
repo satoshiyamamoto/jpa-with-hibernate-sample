@@ -1,13 +1,12 @@
 package name.yamamoto.satoshi.persistence.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class OrderLine extends Model {
@@ -17,6 +16,8 @@ public class OrderLine extends Model {
 	@ManyToOne @JoinColumn(name="orderId", insertable=false, updatable=false)
 	private Order order;
 	private Long productId;
+	@OneToOne @JoinColumn(name="productId", insertable=false, updatable=false)
+	private Product product;
 	private Integer quantity;
 	private Double amount;
 	private Date createAt;
@@ -68,6 +69,12 @@ public class OrderLine extends Model {
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -91,72 +98,6 @@ public class OrderLine extends Model {
 	}
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
-	}
-	
-}
-
-@Embeddable
-class OrderLinePK implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private Long orderId;
-	private Long orderLineId;
-	
-	public OrderLinePK() {}
-	
-	public OrderLinePK(long orderId, long orderLineId) {
-		super();
-		this.orderId = orderId;
-		this.orderLineId = orderLineId;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
-		result = prime * result
-				+ ((orderLineId == null) ? 0 : orderLineId.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OrderLinePK other = (OrderLinePK) obj;
-		if (orderId == null) {
-			if (other.orderId != null)
-				return false;
-		} else if (!orderId.equals(other.orderId))
-			return false;
-		if (orderLineId == null) {
-			if (other.orderLineId != null)
-				return false;
-		} else if (!orderLineId.equals(other.orderLineId))
-			return false;
-		return true;
-	}
-
-
-
-	public Long getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
-
-	public Long getOrderLineId() {
-		return orderLineId;
-	}
-
-	public void setOrderLineId(Long orderLineId) {
-		this.orderLineId = orderLineId;
 	}
 	
 }
