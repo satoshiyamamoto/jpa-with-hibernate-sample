@@ -59,7 +59,7 @@ public class Main {
 				
 				for (OrderLine orderLine :order.getOrderLines()) {
 					String logline = String.format(
-						"%n  %d: %-40s %d x %.2f",
+						"%n  %d: %-36s %d x %.2f",
 						orderLine.getPk().getOrderLineId(),
 						orderLine.getProduct().getName(),
 						orderLine.getQuantity(),
