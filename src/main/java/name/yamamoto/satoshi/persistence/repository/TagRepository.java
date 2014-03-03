@@ -20,7 +20,7 @@ public class TagRepository implements GenericRepository<Tag, Long> {
 
 	@Override
 	public List<Tag> findAll() {
-		return em.createQuery("select p from Product p", Tag.class).getResultList();
+		return em.createQuery("select t from Tag t", Tag.class).getResultList();
 	}
 
 	@Override
