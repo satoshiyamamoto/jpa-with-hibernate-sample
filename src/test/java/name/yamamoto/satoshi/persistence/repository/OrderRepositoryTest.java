@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:applicationContext.xml"})
+@ContextConfiguration({ "classpath:applicationContext.xml" })
 public class OrderRepositoryTest {
 	@Inject
 	private OrderRepository repository;
@@ -32,16 +32,16 @@ public class OrderRepositoryTest {
 		assertThat(result.getOrderLines(), notNullValue());
 		assertThat(result.getOrderLines().isEmpty(), equalTo(false));
 		double amount = 0.0;
-		for (OrderLine orderLine : result.getOrderLines()) 
+		for (OrderLine orderLine : result.getOrderLines())
 			amount += orderLine.getAmount();
 		assertThat(result.getTotalAmount(), equalTo(amount));
 	}
-	
+
 	@Test
 	public void testFind_SouldBeFindAll() {
 		List<Order> results = repository.findAll();
 		assertThat(results, notNullValue());
 		assertThat(results.size(), equalTo(2));
 	}
-	
+
 }

@@ -8,7 +8,7 @@ insert into product_tag values (1, 1, current_timestamp, current_timestamp);
 insert into product_tag values (1, 2, current_timestamp, current_timestamp);
 insert into product_tag values (2, 1, current_timestamp, current_timestamp);
 insert into product_tag values (2, 2, current_timestamp, current_timestamp);
-insert into orders values (1, 20.00, current_timestamp, current_timestamp, current_timestamp)
+insert into orders values (1, 60.00, current_timestamp, current_timestamp, current_timestamp)
 insert into orders values (2, 20.00, current_timestamp, current_timestamp, current_timestamp)
 insert into order_line values (1, 1, 1, 2, 20.00, current_timestamp, current_timestamp);
 insert into order_line values (1, 2, 1, 1, 10.00, current_timestamp, current_timestamp);
